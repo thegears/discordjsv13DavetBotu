@@ -12,6 +12,7 @@ module.exports = {
 		var oldInvites = client.invites.get(member.guild.id);
 
 		var invite = nowInvites.find(i => i.uses > oldInvites.find(oi => oi.code == i.code).uses);
+		oldInvites.find(oi => oi.code == i.code).uses += 1;
 
 		db.add(`${member.guild.id}_${invite.inviter.id}_invite_count`, 1);
 		db.set(`${member.guild.id}_${member.id}_inviter`, `${invite.inviter.id}`);
